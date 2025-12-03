@@ -1,0 +1,37 @@
+# Archivos del Sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Node.js (si se usa en el futuro)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python (si se agrega backend)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp

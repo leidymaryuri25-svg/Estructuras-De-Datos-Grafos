@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Post 2: Representación de Grafos - Lista de Adyacencia vs Matriz de Adyacencia">
+    <title>Post #2: Representación de Grafos | Blog Técnico</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div>
+                <h1>🕸️ Blog de Grafos</h1>
+                <p>Estructura de Datos</p>
+            </div>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="index.html#posts">Artículos</a>
+                <a href="https://github.com/leidymaryuri25-svg/Estructuras-De-Datos-Grafos" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container">
+        <article class="post-content">
+            <!-- HEADER DEL POST -->
+            <div class="post-header">
+                <h1>Post #2: Representación de Grafos</h1>
+                <h2 style="color: #7f8c8d; font-size: 1.2rem; font-weight: normal; margin-top: 0.5rem;">Lista de Adyacencia vs Matriz de Adyacencia</h2>
+                <div class="meta">
+                    <span>📅 Publicado: Diciembre 2025</span>
+                    <span>⏱️ Lectura: 6 minutos</span>
+                    <span>👤 Autor: Leidy Maryuri Rodriguez Jimenez</span>
+                </div>
+            </div>
+
+            <!-- TABLA DE CONTENIDOS -->
+            <div class="toc">
+                <h3>📋 Tabla de Contenidos</h3>
+                <ul>
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#lista-adyacencia">Lista de Adyacencia</a></li>
+                    <li><a href="#matriz-adyacencia">Matriz de Adyacencia</a></li>
+                    <li><a href="#comparacion">Comparación</a></li>
+                    <li><a href="#cual-usar">¿Cuál Usar?</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTENIDO DEL POST -->
+            <div class="post-body">
+                <h2 id="introduccion">Introducción</h2>
+                <p>Una de las decisiones más importantes al trabajar con grafos es cómo representarlos en memoria. Existen dos principales métodos: la <span class="highlight">lista de adyacencia</span> y la <span class="highlight">matriz de adyacencia</span>. Cada una tiene ventajas y desventajas, y la elección depende de las características específicas del problema.</p>
+
+                <div class="info-box">
+                    <strong>💡 Información:</strong> La representación elegida afecta directamente la complejidad temporal y espacial de los algoritmos que ejecutemos sobre el grafo.
+                </div>
+
+                <h2 id="lista-adyacencia">1. Lista de Adyacencia</h2>
+
+                <h3>Concepto</h3>
+                <p>Una <span class="highlight">lista de adyacencia</span> es una colección de listas, donde cada vértice tiene asociada una lista de sus vértices adyacentes.</p>
+
+                <div class="code-block">
+Estructura:
+Para cada vértice v:
+    lista[v] = [lista de vértices adyacentes a v]
+
+Ejemplo:
+A → [B, C, E]
+B → [A, C, D]
+C → [A, B, D]
+D → [B, C, E]
+E → [A, D]
+                </div>
+
+                <h3>Características</h3>
+                <ul>
+                    <li><strong>Espacio:</strong> O(V + E) donde V = vértices, E = aristas</li>
+                    <li><strong>Acceso a adyacentes:</strong> O(grado del vértice)</li>
+                    <li><strong>Verificar arista (u,v):</strong> O(grado de u)</li>
+                    <li><strong>Insertar arista:</strong> O(1)</li>
+                    <li><strong>Eliminar arista:</strong> O(grado del vértice)</li>
+                </ul>
+
+                <h3>Ventajas</h3>
+                <ul>
+                    <li>✓ <strong>Eficiente en espacio para grafos dispersos:</strong> Solo almacena aristas existentes</li>
+                    <li>✓ <strong>Ideal para grafos grandes:</strong> No desperdicia memoria</li>
+                    <li>✓ <strong>Recorridos eficientes:</strong> Fácil acceso a todos los vecinos de un vértice</li>
+                    <li>✓ <strong>Flexible:</strong> Fácil de modificar</li>
+                </ul>
+
+                <h3>Desventajas</h3>
+                <ul>
+                    <li>✗ <strong>Verificación de arista lenta:</strong> Puede requerir recorrer toda la lista</li>
+                    <li>✗ <strong>Más compleja de implementar:</strong> Requiere gestión dinámica de memoria</li>
+                </ul>
+
+                <h3>Representación Visual - Lista de Adyacencia</h3>
+                <div class="diagram">
+                    <h4>Lista de Adyacencia - Mismo Grafo</h4>
+                    <div id="adjacency-list-example"></div>
+                </div>
+
+                <h2 id="matriz-adyacencia">2. Matriz de Adyacencia</h2>
+
+                <h3>Concepto</h3>
+                <p>Una <span class="highlight">matriz de adyacencia</span> es una matriz cuadrada de tamaño V×V, donde la entrada [i][j] es 1 (o el peso) si existe una arista entre los vértices i y j, y 0 en caso contrario.</p>
+
+                <div class="code-block">
+Estructura:
+matriz[i][j] = 1  si existe arista (i,j)
+matriz[i][j] = 0  si NO existe arista (i,j)
+
+Para grafos ponderados:
+matriz[i][j] = peso de la arista (i,j)
+matriz[i][j] = ∞ o -1  si NO existe arista
+                </div>
+
+                <h3>Características</h3>
+                <ul>
+                    <li><strong>Espacio:</strong> O(V²)</li>
+                    <li><strong>Acceso a arista (u,v):</strong> O(1) - Acceso directo</li>
+                    <li><strong>Verificar si existe arista:</strong> O(1)</li>
+                    <li><strong>Insertar arista:</strong> O(1)</li>
+                    <li><strong>Eliminar arista:</strong> O(1)</li>
+                    <li><strong>Acceso a todos los adyacentes:</strong> O(V)</li>
+                </ul>
+
+                <h3>Ventajas</h3>
+                <ul>
+                    <li>✓ <strong>Acceso rápido a aristas:</strong> O(1) para verificar si existe una arista</li>
+                    <li>✓ <strong>Operaciones simples:</strong> Todas las operaciones son O(1)</li>
+                    <li>✓ <strong>Ideal para grafos densos:</strong> Buen rendimiento cuando hay muchas aristas</li>
+                    <li>✓ <strong>Fácil implementación:</strong> Solo es un arreglo bidimensional</li>
+                </ul>
+
+                <h3>Desventajas</h3>
+                <ul>
+                    <li>✗ <strong>Uso excesivo de espacio:</strong> O(V²) incluso para grafos dispersos</li>
+                    <li>✗ <strong>Desperdicio de memoria:</strong> Almacena ceros para aristas inexistentes</li>
+                    <li>✗ <strong>Ineficiente para grafos grandes:</strong> Puede no caber en memoria</li>
+                    <li>✗ <strong>Recorridos lentos:</strong> Debe verificar todas las celdas</li>
+                </ul>
+
+                <h3>Representación Visual - Matriz de Adyacencia</h3>
+                <div class="diagram">
+                    <h4>Matriz de Adyacencia - Mismo Grafo</h4>
+                    <p style="color: #7f8c8d; margin-bottom: 1rem;">Los números en azul indican que existe una arista entre esos vértices</p>
+                    <div id="adjacency-matrix-example"></div>
+                </div>
+
+                <h2 id="comparacion">Comparación Detallada</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Operación</th>
+                            <th>Lista de Adyacencia</th>
+                            <th>Matriz de Adyacencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Espacio</strong></td>
+                            <td>O(V + E)</td>
+                            <td>O(V²)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Verificar arista (u,v)</strong></td>
+                            <td>O(grado de u)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Obtener vecinos</strong></td>
+                            <td>O(grado de v)</td>
+                            <td>O(V)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insertar arista</strong></td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eliminar arista</strong></td>
+                            <td>O(grado del vértice)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recorrer todas las aristas</strong></td>
+                            <td>O(V + E)</td>
+                            <td>O(V²)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BFS/DFS</strong></td>
+                            <td>O(V + E)</td>
+                            <td>O(V²)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 id="cual-usar">¿Cuál Usar?</h2>
+
+                <h3>Usa Lista de Adyacencia cuando:</h3>
+                <ul>
+                    <li>📌 El grafo es <strong>disperso</strong> (E << V²)</li>
+                    <li>📌 Necesitas guardar <strong>memoria</strong></li>
+                    <li>📌 Harás <strong>muchos recorridos</strong> (BFS, DFS)</li>
+                    <li>📌 Necesitas acceso rápido a los <strong>vecinos de un vértice</strong></li>
+                    <li>📌 Trabajas con <strong>grafos dinámicos</strong> (inserción/eliminación frecuente)</li>
+                </ul>
+
+                <h3>Usa Matriz de Adyacencia cuando:</h3>
+                <ul>
+                    <li>📌 El grafo es <strong>denso</strong> (E ≈ V²)</li>
+                    <li>📌 Necesitas <strong>acceso rápido</strong> a información de aristas</li>
+                    <li>📌 Necesitas <strong>consultar frecuentemente</strong> si existe una arista</li>
+                    <li>📌 Usarás <strong>álgebra matricial</strong> (multiplicación de matrices, etc.)</li>
+                    <li>📌 El grafo es <strong>pequeño</strong> o tienes mucha memoria disponible</li>
+                </ul>
+
+                <div class="success-box">
+                    <strong>✓ Regla General:</strong> Para la mayoría de aplicaciones reales, la <strong>lista de adyacencia</strong> es la mejor opción porque los grafos suelen ser dispersos.
+                </div>
+
+                <h3>Ejemplo Práctico</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Caso de Uso</th>
+                            <th>Mejor Representación</th>
+                            <th>Razón</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Red Social</strong></td>
+                            <td>Lista de Adyacencia</td>
+                            <td>Millones de usuarios pero cada uno conectado a pocos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matriz de Transición</strong></td>
+                            <td>Matriz de Adyacencia</td>
+                            <td>Grafo denso, necesitas acceso rápido a probabilidades</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sistema de Rutas</strong></td>
+                            <td>Lista de Adyacencia</td>
+                            <td>Pocas carreteras entre ciudades comparado con total posible</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Análisis de ADN</strong></td>
+                            <td>Lista de Adyacencia</td>
+                            <td>Grafo grande y disperso de secuencias genéticas</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Conclusión</h2>
+                <p>Entender las diferencias entre lista de adyacencia y matriz de adyacencia es crucial para elegir la representación adecuada. La decisión afecta directamente la eficiencia de tus algoritmos y el uso de memoria de tu aplicación.</p>
+
+                <p>En el próximo artículo, exploraremos cómo utilizar estas representaciones para implementar los dos algoritmos fundamentales de recorrido: <span class="highlight">BFS (Breadth-First Search)</span> y <span class="highlight">DFS (Depth-First Search)</span>.</p>
+
+                <div style="background: #ecf0f1; padding: 2rem; border-radius: 8px; margin-top: 2rem; text-align: center;">
+                    <h3 style="margin-bottom: 1rem;">Continúa tu aprendizaje</h3>
+                    <a href="post3.html" class="btn btn-primary">Leer Post #3: Algoritmos BFS y DFS →</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2024 Blog de Grafos | <a href="index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
